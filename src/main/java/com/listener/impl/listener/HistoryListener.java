@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -38,7 +39,8 @@ public class HistoryListener {
     private void publishEvent(String operation, Object entity) {
         String entityName = entity.getClass().getSimpleName();
         UUID entityId = getEntityId(entity);
-        eventPublisher.publishEvent(new AuditEvent(operation, entityName, entityId));
+        LocalDateTime date = getLocalDateTime(entity);
+        eventPublisher.publishEvent(new AuditEvent(operation, entityName, entityId, date));
     }
 
     private UUID getEntityId(Object entity) {
@@ -48,6 +50,16 @@ public class HistoryListener {
             return (UUID) field.get(entity);
         } catch (Exception e) {
             throw new RuntimeException("Erro ao obter o ID da entidade", e);
+        }
+    }
+
+    private LocalDateTime getLocalDateTime(Object entity){
+        try {
+            Field field = entity.getClass().getDeclaredField("createdDate");
+            field.setAccessible(true);
+            return (LocalDateTime) field.get(entity);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao obter a data da entidade", e);
         }
     }
 }

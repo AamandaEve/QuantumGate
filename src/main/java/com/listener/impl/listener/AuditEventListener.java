@@ -19,7 +19,7 @@ class AuditEventListener {
     @TransactionalEventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW) // Garante que será salvo em uma nova transação
     public void handleAuditEvent(AuditEvent event) {
-        History history = new History(event.getOperation(), event.getEntityId(), event.getEntityName());
+        History history = new History(event.getOperation(), event.getEntityId(), event.getEntityName(), event.getDate());
         historyRepository.save(history);
     }
 }
