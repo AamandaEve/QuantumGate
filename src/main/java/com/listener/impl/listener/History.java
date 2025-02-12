@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -27,9 +28,10 @@ public class History {
     private UUID entityId; // ID do item afetado
 
 
-    public History(String operation, UUID entityId, String name){
+    public History(String operation, UUID entityId, String name, LocalDateTime date){
         this.name = name;
         this.entityId = entityId;
         this.operation = operation;
+        this.date = LocalDateTime.now();
     }
 }
