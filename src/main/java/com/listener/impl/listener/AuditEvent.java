@@ -8,12 +8,14 @@ public class AuditEvent {
     private final String entityName;
     private final UUID entityId;
     private final LocalDateTime date;
+    private final String keywords;
 
-    public AuditEvent(String operation, String entityName, UUID entityId, LocalDateTime date) {
+    public AuditEvent(String operation, String entityName, UUID entityId, LocalDateTime date, String keywords) {
         this.operation = operation;
         this.entityName = entityName;
         this.entityId = entityId;
         this.date = date;
+        this.keywords = keywords;
     }
 
     public String getOperation() {
@@ -29,5 +31,7 @@ public class AuditEvent {
     }
 
     public LocalDateTime getDate(){return date;}
+
+    public String getKeywords(){return keywords;}
 }
 

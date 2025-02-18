@@ -26,12 +26,13 @@ public class History {
     private LocalDateTime date;
     private String name; // Produto, Item, Compra, etc.
     private UUID entityId; // ID do item afetado
+    private String keywords;
 
-
-    public History(String operation, UUID entityId, String name, LocalDateTime date){
+    public History(String operation, UUID entityId, String name, LocalDateTime date, String keywords){
         this.name = name;
         this.entityId = entityId;
         this.operation = operation;
         this.date = LocalDateTime.now();
+        this.keywords = keywords;
     }
 }

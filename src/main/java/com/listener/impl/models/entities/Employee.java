@@ -1,5 +1,6 @@
 package com.listener.impl.models.entities;
 
+import com.listener.impl.listener.AuditKeyword;
 import com.listener.impl.listener.HistoryListener;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,9 +22,12 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @AuditKeyword
     private String name;
+    @AuditKeyword
     private String lastName;
     private int age;
+    @AuditKeyword
     private String position;
 
     @CreatedDate
